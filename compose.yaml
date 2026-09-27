@@ -1,0 +1,26 @@
+services:
+  publisher:
+    build: .
+    environment:
+      ROS_DOMAIN_ID: "42"
+      ROS_AUTOMATIC_DISCOVERY_RANGE: SUBNET
+    volumes:
+      - ./data:/app/data:ro
+    command:
+      - python3
+      - /app/scripts/track_publisher.py
+
+  subscriber:
+    build: .
+    environment:
+      ROS_DOMAIN_ID: "42"
+      ROS_AUTOMATIC_DISCOVERY_RANGE: SUBNET
+    volumes:
+      - ./output/docker:/app/output
+    command:
+      - python3
+      - /app/scripts/track_subscriber.py
+      - --ros-args
+      - -p
+      - output_dir:=/app/output
+

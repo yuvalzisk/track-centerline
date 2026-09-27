@@ -5,3 +5,6 @@ data/*.csv
 build/
 install/
 log/
+
+output/ros/
+output/docker/
